@@ -1,0 +1,17 @@
+@import helper._
+@import scala.collection.mutable.ListBuffer
+
+@(userForm: Form[FilledCategoryForm], category: Category)(implicit messages: Messages)
+
+<h1>Edit Category</h1>
+
+@form(routes.CategoryController.filledFormPut()) {
+    @inputText(userForm("id"), Symbol("_label") -> "Category Id", Symbol("readonly") -> "readonly")
+    @inputText(userForm("name"), Symbol("_label") -> "Category Name")
+
+    <div class="buttons">
+        <input type="submit" value="Save"/>
+    </div>
+}
+
+<a href="@controllers.routes.CategoryController.availableCategories()">Back</a>

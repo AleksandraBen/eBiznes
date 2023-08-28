@@ -1,0 +1,28 @@
+@import helper._
+@import scala.collection.mutable.ListBuffer
+
+@(userForm: Form[FilledProductForm], categories: ListBuffer[Category], product: Product)(implicit messages: Messages)
+
+<h1>Edit Product</h1>
+
+@form(routes.ProductController.filledFormPut()) {
+    @inputText(userForm("id"), Symbol("_label") -> "Product Id", Symbol("readonly") -> "readonly")
+    @inputText(userForm("name"), Symbol("_label") -> "Product Name")
+    <label for="category"></label>
+    <p>Category<br>
+    <select name="category" id="category">
+    @for(cat <- categories){
+        @if(cat.categoryId.toString == product.category.toString) {
+            <option value="@cat.categoryId" selected>@cat.categoryName</option>
+        }else{
+            <option value="@cat.categoryId">@cat.categoryName</option>
+        }
+    }
+    </p>
+    </select>
+    <div class="buttons">
+        <input type="submit" value="Save"/>
+    </div>
+}
+
+<a href="@controllers.routes.ProductController.availableProducts()">Back</a>

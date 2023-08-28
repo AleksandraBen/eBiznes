@@ -1,0 +1,17 @@
+@import helper._
+@import scala.collection.mutable.ListBuffer
+@(userForm: Form[BasketForm])(implicit messages: Messages)
+
+<h1>Add Basket</h1>
+
+@form(routes.BasketController.basketFormPost()) {
+    @inputText(userForm("id"), Symbol("_label") -> "Basket Id")
+    @inputText(userForm("name"), Symbol("_label") -> "Basket Name")
+
+    </p>
+    <div class="buttons">
+        <input type="submit" value="Add Basket"/>
+    </div>
+}
+
+<a href="@controllers.routes.BasketController.availableBaskets()">Back</a>

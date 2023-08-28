@@ -1,0 +1,26 @@
+@import helper._
+@import scala.collection.mutable.ListBuffer
+
+@(userForm: Form[FilledBasketForm], basket: Basket, products: List[Product])(implicit messages: Messages)
+
+<h1>Edit Basket</h1>
+
+@form(routes.BasketController.filledFormPut()) {
+    @inputText(userForm("id"), Symbol("_label") -> "Basket Id", Symbol("readonly") -> "readonly")
+    @inputText(userForm("name"), Symbol("_label") -> "Basket Name")
+
+    <div class="buttons">
+        <input type="submit" value="Save"/>
+    </div>
+}
+
+<ul>
+@for(product <- products) {
+    <b>@product.productId</b>
+    @product.productName
+    @product.category
+    <a href="@controllers.routes.BasketController.deleteProduct(product.productId, basket.basketId)">Delete</a>
+    <br>
+    }
+</ul>
+<a href="@controllers.routes.BasketController.availableBaskets()">Back</a>

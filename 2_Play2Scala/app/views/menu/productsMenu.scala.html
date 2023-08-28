@@ -1,0 +1,15 @@
+@this(categoryFormatter: CategoryFormatter)
+@(products: List[Product])
+
+<ul>
+@for(product <- products) {
+    <b>@product.productId</b>
+    @product.productName
+    @product.category
+    <a href="@controllers.routes.ProductController.delete(product.productId)">Delete</a>
+    <a href="@controllers.routes.ProductController.filledForm(product.productId)">Edit</a>
+    <br>
+}
+</ul>
+<a href="@controllers.routes.ProductController.simpleForm()">Add Product</a>
+<a href="@controllers.routes.ProductController.index">Back</a>

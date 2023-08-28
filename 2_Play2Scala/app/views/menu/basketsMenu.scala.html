@@ -1,0 +1,14 @@
+@this(categoryFormatter: CategoryFormatter)
+@(baskets: List[Basket])
+
+<ul>
+@for(basket <- baskets) {
+    <b>@basket.basketId</b>
+    @basket.basketName
+    <a href="@controllers.routes.BasketController.delete(basket.basketId)">Delete</a>
+    <a href="@controllers.routes.BasketController.filledForm(basket.basketId)">Edit</a>
+    <br>
+}
+</ul>
+<a href="@controllers.routes.BasketController.simpleForm()">Add Basket</a>
+<a href="@controllers.routes.ProductController.index">Back</a>
