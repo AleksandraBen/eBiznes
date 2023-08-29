@@ -1,2 +1,3 @@
 # eBiznes
-Folder 5_Frontend contains also exercise 6 (Cypress testing)
+6_Cypress: tests included in 5_Frontend folder
+7_Sonar: ![Sonar Tests Results](7_Sonar/SonarTests.png)
