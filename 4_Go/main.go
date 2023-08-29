@@ -1,10 +1,18 @@
 package main
 
 import (
+	"net/http"
+	"strconv"
+
     "gorm.io/driver/sqlite"
     "github.com/labstack/echo/v4"
     "gorm.io/gorm"
 )
+
+const invalidCartIdReturn = "Invalid cart ID"
+const productNotFoundReturn = "Product not found"
+const productsLink = "/products"
+const productsIdLink = "/products/:id"
 
 type Product struct { 
     gorm.Model
@@ -28,11 +36,17 @@ type CartController struct {
 }
 
 func setCORSHeader(next echo.HandlerFunc) echo.HandlerFunc {
-    return func(c echo.Context) error {
-        c.Response().Header().Set("Access-Control-Allow-Origin", "*")
+	return func(c echo.Context) error {
+		c.Response().Header().Set("Access-Control-Allow-Origin", "*")
+		c.Response().Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
+		c.Response().Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
-        return next(c)
-    }
+		if c.Request().Method == "OPTIONS" {
+			return c.NoContent(http.StatusOK)
+		}
+
+		return next(c)
+	}
 }
 
 func migrate(db *gorm.DB) {
@@ -89,7 +103,7 @@ func (cc *CartController) AddToCart(c echo.Context) error {
 	// Parse cart ID
 	cartID_, err := strconv.ParseUint(cartID, 10, 64)
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, map[string]string{"error": "Invalid cart ID"})
+		return c.JSON(http.StatusBadRequest, map[string]string{"error": invalidCartIdReturn})
 	}
 
 	// Parse product ID from request body
@@ -103,7 +117,7 @@ func (cc *CartController) AddToCart(c echo.Context) error {
 	// Retrieve the product
 	var product Product
 	if result := cc.db.First(&product, requestData.ProductID); result.Error != nil {
-		return c.JSON(http.StatusNotFound, map[string]string{"error": "Product not found"})
+		return c.JSON(http.StatusNotFound, map[string]string{"error": productNotFoundReturn})
 	}
 
 	// Add the product to the cart
@@ -122,7 +136,7 @@ func (cc *CartController) GetCart(c echo.Context) error {
 	// Parse cart ID
 	cartID_, err := strconv.ParseUint(cartID, 10, 64)
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, map[string]string{"error": "Invalid cart ID"})
+		return c.JSON(http.StatusBadRequest, map[string]string{"error": invalidCartIdReturn})
 	}
 
 	// Retrieve the cart items with associated products
@@ -139,7 +153,7 @@ func (cc *CartController) DeleteFromCart(c echo.Context) error {
 	// Parse cart ID
 	cartID_, err := strconv.ParseUint(cartID, 10, 64)
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, map[string]string{"error": "Invalid cart ID"})
+		return c.JSON(http.StatusBadRequest, map[string]string{"error": invalidCartIdReturn})
 	}
 
 	// Parse product ID
@@ -168,7 +182,7 @@ func (cc *CartController) GetAllCart(c echo.Context) error {
 	// Parse cart ID
 	cartID_, err := strconv.ParseUint(cartID, 10, 64)
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, map[string]string{"error": "Invalid cart ID"})
+		return c.JSON(http.StatusBadRequest, map[string]string{"error": invalidCartIdReturn})
 	}
 
 	// Retrieve the cart items with associated products
@@ -179,7 +193,7 @@ func (cc *CartController) GetAllCart(c echo.Context) error {
 	for i, item := range cartItems {
 		var product Product
 		if result := cc.db.First(&product, item.ProductID); result.Error != nil {
-			return c.JSON(http.StatusNotFound, map[string]string{"error": "Product not found"})
+			return c.JSON(http.StatusNotFound, map[string]string{"error": productNotFoundReturn})
 		}
 		items[i] = product
 	}
@@ -203,11 +217,11 @@ func main() {
 	e.Use(setCORSHeader)
 
     // CRUD implementation
-    e.POST("/products", pc.CreateProduct)
-    e.GET("/products", pc.GetAllProducts)
-    e.GET("/products/:id", pc.GetProduct)
-    e.PUT("/products/:id", pc.UpdateProduct)
-    e.DELETE("/products/:id", pc.DeleteProduct)
+    e.POST(productsLink, pc.CreateProduct)
+    e.GET(productsLink, pc.GetAllProducts)
+    e.GET(productsIdLink, pc.GetProduct)
+    e.PUT(productsIdLink, pc.UpdateProduct)
+    e.DELETE(productsIdLink, pc.DeleteProduct)
 
 	// Cart Routes
 	e.GET("/cart/:id", cc.GetCart)
