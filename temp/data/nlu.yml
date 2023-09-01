@@ -1,0 +1,189 @@
+version: "2.0"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+    - sup
+    - god afternoon
+    - hey dude
+
+- intent: goodbye
+  examples: |
+    - good afternoon
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+    - see ya
+    - see you
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+    - yah
+    - yup
+    - yeah
+    - cool
+    - dope
+    - col
+    - yap
+    - ok
+    - okey
+    - kk
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+    - no need
+    - nah
+    - na
+    - don't
+    - not
+    - nope
+
+- intent: list_menu_items
+  examples: |
+    - what can I eat?
+    - what are menu items?
+    - food choices
+    - list menu
+    - show menu
+    - food list
+    - available choices
+    - meals
+    - food
+    - choices
+    - menu
+    - can you show me the menu?
+    - what are the available choces?
+    - manu
+    - menue
+    
+- intent: check_opening_hours
+  examples: |
+    - is restaurant open at [9](hour) [Monday](day)?
+    - can I order food at [3](hour) on [Tuesday](day)?
+    - is restaurant serving food at [6](hour) on [Wednesday](day)?
+    - is restaurant serving food on [Thursday](day) at [18](hour)?
+    - is restaurant open at [8](hour) on [Friday](day)?
+    - are you open on [Sunday](day)?
+    - are you open at [6](hour) on [Wednesday](day)?
+    - are you open on [Thursday](day) at [18](hour)?
+    - [Monday](day) [11](hour) open?
+    - [Monday](day) [11](hour)?
+    
+- intent: order_meal
+  examples: |
+    - I would like to order [Lasagne](orderItem) [with ketchup](additionalRequest) please
+    - I would likk to order [Dumplings](orderItem)
+    - I would like to order [Lasagne](orderItem) [without tomatoes](additionalRequest) plese
+    - I would liek to order [Burger](orderItem) [without lettuce](additionalRequest) 
+    - I want [Hot-dog](orderItem) [without gluten](additionalRequest) and [Dumplings](orderItem) [without pork](additionalRequest)
+    - Give me [lactose free](additionalRequest) [Cake](orderItem), [Tiramisu](orderItem) and [Dumplings](orderItem)
+    - Add [Spaghetti](orderItem) to the order
+    - Want one [gluten free](additionalRequest) [Spaghetti](orderItem) [no basil](additionalRequest) please
+    
+- lookup: orderItem
+  examples: |
+    - Lasagne
+    - Dumplings
+    - Burger
+    - Hot-dog
+    - Spaghetti
+    - Tiramisu
+    - Cake
+    - Pizza
+    - Pancakes
+    - Crepes
+    - Sausages
+    - Donut
+    - Soup
+    - Salad
+    - Eggs
+
+- intent: set_delivery_address
+  examples: |
+    - my address is [Krakow Zakopianska 123](address)
+    - I live on [Czarnowiejska 53/12 Warszawa](address)
+    - please deliver on [Nowogrodzka 333A Lodz](address)
+    - my adress is [Poznan Mickiewicza 11B](address)
+    - my addres is [Wroclaw Opolska 5](address)
+    
+- lookup: address
+  examples: |
+    - Krakow Zakopianska 123
+    - Czarnowiejska 53/12 Warszawa
+    - Nowogrodzka 333A Lodz
+    - Poznan Mickiewicza 11B
+    - Lodz Nowogrodzka 25/16
+    - Krakow Mickiewicza 55
+    - Wroclaw Opolska 24C
+    - Warszawa Zakopianska 15
+    - Lodz Zakopianska 88
+    - Poznan Zakopianska 345A
+    - Zakopianska 99/23 Krakow
+    - Opolska 12 Wodzislaw Slaski
+    - Dluga 33A/9 Gdansk
+    - Wesola 982 Wroclaw
+    - Radziwollowska 4 Szczecin
+    - Wojska Polskiego 15/2 Katowice
+    - Badurskiego 224/21 Sosnowiec
+    
+- lookup: additionalRequest
+  examples: |
+    - with ketchup
+    - without ketchup
+    - wit ketchup
+    - with met
+    - without meat
+    - without gluten
+    - without pork
+    - gluten free
+    - lactose free
+    - lactos fre
+    - gluten fee
+    - vegan
+    - vege
+    - vegetarian
+    - no ketchup
+    - no lettuce
+    - no onion
+    - without onion
+    - extra kethup
+    - without salt
+    - no salt
+    - extra meat
+    - extra onion
+    - double meat
+    - double kethup
+    - double onion

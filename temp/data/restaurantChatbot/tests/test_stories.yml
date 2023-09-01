@@ -1,0 +1,12 @@
+#### This file contains tests to evaluate that your bot behaves as expected.
+#### If you want to learn more, please see the docs: https://rasa.com/docs/rasa/testing-your-assistant
+
+stories:
+  - story: ChatGPT conversation with welcome and goodbye
+    steps:
+      - intent: greet
+      - action: utter_first_greeting
+      - action: action_call_gpt
+      - active_loop: null
+      - intent: goodbye
+      - action: utter_goodbye

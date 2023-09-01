@@ -1,0 +1,17 @@
+version: "2.0"
+
+rules:
+  - rule: Always greet
+    steps:
+      - intent: greet
+      - action: utter_greet
+
+  - rule: Always say goodbye
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - rule: Redirect to GPT
+    steps:
+      - intent: user_message
+      - action: action_call_gpt

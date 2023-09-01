@@ -1,0 +1,53 @@
+version: "2.0"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Say order summary after customer stops listing order items
+  steps:
+  - action: action_add_order
+  - intent: deny
+  - action: action_summarise_order
+  - action: utter_delivery
+  
+- rule: Get delivery or pickup choice 1
+  steps:
+  - action: action_summarise_order
+  - action: utter_delivery
+  - intent: affirm
+  - action: action_delivery
+  
+- rule: Get delivery or pickup choice 2
+  steps:
+  - action: action_summarise_order
+  - action: utter_delivery
+  - intent: deny
+  - action: action_delivery
+
+- rule: Get delivery address confirmation 0
+  steps:
+  - intent: set_delivery_address
+  - action: action_input_address
+
+- rule: Get delivery address confirmation 1 #wrong address
+  steps:
+  - action: action_input_address
+  - intent: deny
+  - action: utter_address
+  
+- rule: Get delivery address confirmation 2 #correct address
+  steps:
+  - action: action_input_address
+  - intent: affirm
+  - action: utter_thankyou
+  
+- rule: Show opening hours when asked for it
+  steps:
+  - action: action_check_opening_hours
+  - intent: affirm
+  - action: action_display_opening_hours
+  - action: utter_next

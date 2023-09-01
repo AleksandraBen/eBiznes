@@ -1,0 +1,35 @@
+stories:
+  - story: User interacts with GPT
+    steps:
+      - intent: user_message
+      - action: action_call_gpt
+      - slot_was_set:
+          - gpt_response
+
+  - story: User asks about menu items
+    steps:
+      - intent: list_menu_items
+      - action: action_call_gpt
+      - slot_was_set:
+          - gpt_response
+
+  - story: User inquires about opening hours
+    steps:
+      - intent: check_opening_hours
+      - action: action_call_gpt
+      - slot_was_set:
+          - gpt_response
+
+  - story: User places an order
+    steps:
+      - intent: order_meal
+      - action: action_call_gpt
+      - slot_was_set:
+          - gpt_response
+
+  - story: User sets delivery address
+    steps:
+      - intent: set_delivery_address
+      - action: action_call_gpt
+      - slot_was_set:
+          - gpt_response

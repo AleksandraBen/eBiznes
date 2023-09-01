@@ -1,0 +1,49 @@
+version: "2.0"
+
+intents:
+  - greet:
+    examples: |
+      - Hello!
+      - Hi there!
+      - Hey, how's it going?
+      
+  - goodbye:
+    examples: |
+      - Goodbye!
+      - Bye for now.
+      - See you later!
+      
+  - affirm:
+    examples: |
+      - Yes, that sounds good.
+      - I agree.
+      - Absolutely.
+      
+  - deny:
+    examples: |
+      - No, that's not what I meant.
+      - I disagree.
+      - Not at all.
+      
+  - list_menu_items:
+    examples: |
+      - What's on the menu?
+      - Can you show me the menu?
+      - Tell me about your dishes.
+      
+  - check_opening_hours:
+    examples: |
+      - What are your opening hours?
+      - When do you open and close?
+      - Are you open today?
+      
+  - order_meal:
+    examples: |
+      - I'd like to order a pizza.
+      - Can I get a burger, please?
+      - I'm hungry, let's order some food.
+      
+  - set_delivery_address:
+    examples: |
+      - Here's my delivery address: 123 Main St.
+      - My address for delivery is

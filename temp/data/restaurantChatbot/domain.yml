@@ -1,0 +1,33 @@
+version: "2.0"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - list_menu_items
+  - check_opening_hours
+  - order_meal
+  - set_delivery_address
+
+actions:
+  - action_call_gpt
+
+responses:
+  utter_first_greeting:
+  - text: "Greetings! How can I assist you today?"
+  - text: "Hello there! What can I do for you?"
+  - text: "Hey! How may I help you?"
+  - text: "Hi! What brings you here today?"
+  - text: "Welcome! How can I assist you?"
+
+  utter_goodbye:
+  - text: "Goodbye! Feel free to return anytime."
+  - text: "Farewell! Don't hesitate to come back."
+  - text: "Bye bye! Have a great day!"
+  - text: "See you later! Come back soon."
+  - text: "Take care! See you next time."
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
