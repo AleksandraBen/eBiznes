@@ -1,0 +1,43 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build and push frontend Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: ./frontend
+          file: ./frontend/Dockerfile.frontend
+          push: true
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME_FRONTEND }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD_FRONTEND }}
+          DOCKER_REGISTRY: cloudcifrontend.azurecr.io
+
+  build-backend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build and push backend Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: ./backend
+          file: ./backend/Dockerfile.backend
+          push: true
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME_BACKEND }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD_BACKEND }}
+          DOCKER_REGISTRY: chmuraci.azurecr.io
