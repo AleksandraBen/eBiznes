@@ -6,7 +6,7 @@ const Products = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8888/products')
+    axios.get('https://ebiznesab-backend.azurewebsites.net/products')
       .then(response => {
         setProducts(response.data);
       })
@@ -33,7 +33,7 @@ const Payments = () => {
   const [payments, setPayments] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8888/payments')
+    axios.get('https://ebiznesab-backend.azurewebsites.net/payments')
       .then(response => {
         setPayments(response.data);
       })

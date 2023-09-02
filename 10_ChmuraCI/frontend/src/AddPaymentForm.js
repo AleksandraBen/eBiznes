@@ -57,7 +57,7 @@ const AddPaymentForm = () => {
       currency: currency
     };
 
-    axios.post('http://localhost:8888/payments', paymentData)
+    axios.post('https://ebiznesab-backend.azurewebsites.net/payments', paymentData)
       .then(response => {
         console.log('Payment added successfully');
       })

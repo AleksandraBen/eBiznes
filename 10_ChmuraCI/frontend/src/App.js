@@ -11,7 +11,7 @@ const Products = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8888/products')
+    axios.get('https://ebiznesab-backend.azurewebsites.net/products')
       .then(response => {
         setProducts(response.data);
       })
@@ -27,7 +27,7 @@ const Products = () => {
       product_id: productId,
     };
 
-    axios.post(`http://localhost:8888/cart/${cartId}/items`, requestData)
+    axios.post(`https://ebiznesab-backend.azurewebsites.net/cart/${cartId}/items`, requestData)
       .then(response => {
         console.log('Item added to cart:', response.data);
       })
@@ -55,7 +55,7 @@ const Payments = () => {
   const [payments, setPayments] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8888/payments')
+    axios.get('https://ebiznesab-backend.azurewebsites.net/payments')
       .then(response => {
         setPayments(response.data);
       })
@@ -92,7 +92,7 @@ const Cart = () => {
   }, []);
 
   const fetchCartItems = () => {
-    axios.get('http://localhost:8888/cart/1/items')
+    axios.get('https://ebiznesab-backend.azurewebsites.net/cart/1/items')
       .then(response => {
         setCartItems(response.data);
       })
@@ -104,7 +104,7 @@ const Cart = () => {
   const deleteFromCart = (itemId) => {
     const cartId = 1;
 
-    axios.delete(`http://localhost:8888/cart/${cartId}/items/${itemId}`)
+    axios.delete(`https://ebiznesab-backend.azurewebsites.net/cart/${cartId}/items/${itemId}`)
       .then(response => {
         console.log('Item deleted from cart:', response.data);
         fetchCartItems();
